@@ -28,7 +28,7 @@ export class ProductColorController {
       const data = await this.productColorService.create(createProductColorDto, id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -59,7 +59,7 @@ export class ProductColorController {
       const data = await this.productColorService.remove(+id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 }

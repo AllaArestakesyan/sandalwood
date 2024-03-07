@@ -74,7 +74,7 @@ export class ProductController {
       const data = await this.productService.create({ ...createProductDto }, images);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -85,26 +85,26 @@ export class ProductController {
       const data = await this.productService.findAll();
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
   @HttpCode(HttpStatus.OK)
   @Get("/filter/by")
   async filterBy(
-    @Query("page") page:number,
-    @Query("categoryName") categoryName:string,
-    @Query("color") color:string,
-    @Query("min-price") min_price:number,
-    @Query("max-price") max_price:number,
-    @Query("size") size:number,
-    @Query("limit") limit:number,
+    @Query("page") page: number,
+    @Query("categoryName") categoryName: string,
+    @Query("color") color: string,
+    @Query("min-price") min_price: number,
+    @Query("max-price") max_price: number,
+    @Query("size") size: number,
+    @Query("limit") limit: number,
     @Res() res: Response) {
     try {
-      const data = await this.productService.filterBy({page, categoryName, color, min_price, max_price, size, limit});
+      const data = await this.productService.filterBy({ page, categoryName, color, min_price, max_price, size, limit });
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -116,7 +116,7 @@ export class ProductController {
       const data = await this.productService.findOne(+id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -134,12 +134,12 @@ export class ProductController {
   @ApiBearerAuth('JWT-auth')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Delete(':id')
-  async remove(@Param('id') id: string,  @Res() res: Response) {
-    try{
+  async remove(@Param('id') id: string, @Res() res: Response) {
+    try {
       const data = await this.productService.remove(+id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 }

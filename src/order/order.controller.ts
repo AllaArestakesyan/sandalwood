@@ -1,4 +1,4 @@
-import { Controller,Request, Get,UseGuards, Post, Body, Patch, Param, Delete, HttpCode , HttpStatus, Res} from '@nestjs/common';
+import { Controller, Request, Get, UseGuards, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Res } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -12,7 +12,7 @@ import { Response } from 'express';
 @ApiTags('Order*')
 @Controller('order')
 export class OrderController {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) { }
 
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth('JWT-auth')
@@ -20,17 +20,17 @@ export class OrderController {
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Post()
   async create(
-    @Body()  createOrderDto: CreateOrderDto,
+    @Body() createOrderDto: CreateOrderDto,
     @Request() req,
     @Res() res: Response) {
     try {
       const data = await this.orderService.create(createOrderDto, req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
-  
+
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth('JWT-auth')
   @HasRoles(Role.USER)
@@ -43,7 +43,7 @@ export class OrderController {
       const data = await this.orderService.findOne(+req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 

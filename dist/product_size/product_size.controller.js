@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductSizeController = void 0;
 const common_1 = require("@nestjs/common");
@@ -19,7 +18,10 @@ const product_size_service_1 = require("./product_size.service");
 const create_product_size_dto_1 = require("./dto/create-product_size.dto");
 const update_product_size_dto_1 = require("./dto/update-product_size.dto");
 const swagger_1 = require("@nestjs/swagger");
-const express_1 = require("express");
+const roles_decorator_1 = require("../user/role/roles.decorator");
+const enum_role_1 = require("../user/role/enum.role");
+const passport_1 = require("@nestjs/passport");
+const roles_guard_1 = require("../auth/roles.guard");
 let ProductSizeController = class ProductSizeController {
     constructor(productSizeService) {
         this.productSizeService = productSizeService;
@@ -30,7 +32,7 @@ let ProductSizeController = class ProductSizeController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async update(id, updateProductSizeDto, req, res) {
@@ -39,7 +41,7 @@ let ProductSizeController = class ProductSizeController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async remove(id, req, res) {
@@ -48,40 +50,49 @@ let ProductSizeController = class ProductSizeController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
 };
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, roles_decorator_1.HasRoles)(enum_role_1.Role.ADMIN),
+    (0, swagger_1.ApiBearerAuth)('JWT-auth'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
     (0, common_1.Post)(":productId"),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Param)("productId")),
     __param(3, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_product_size_dto_1.CreateProductSizeDto, Object, Number, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [create_product_size_dto_1.CreateProductSizeDto, Object, Number, Object]),
     __metadata("design:returntype", Promise)
 ], ProductSizeController.prototype, "create", null);
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, roles_decorator_1.HasRoles)(enum_role_1.Role.ADMIN),
+    (0, swagger_1.ApiBearerAuth)('JWT-auth'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Request)()),
     __param(3, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_product_size_dto_1.UpdateProductSizeDto, Object, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [String, update_product_size_dto_1.UpdateProductSizeDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], ProductSizeController.prototype, "update", null);
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, roles_decorator_1.HasRoles)(enum_role_1.Role.ADMIN),
+    (0, swagger_1.ApiBearerAuth)('JWT-auth'),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwt'), roles_guard_1.RolesGuard),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, Object, Object]),
     __metadata("design:returntype", Promise)
 ], ProductSizeController.prototype, "remove", null);
 ProductSizeController = __decorate([

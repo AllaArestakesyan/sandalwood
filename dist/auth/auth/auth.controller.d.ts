@@ -10,7 +10,7 @@ export declare class AuthController {
     login(us: LoginUser, req: any): Promise<{
         access_token: string;
     }>;
-    register(registerDto: RegisterDTO, res: Response): Promise<any>;
-    getProfile(req: any, res: Response): Promise<any>;
+    register(registerDto: RegisterDTO, res: Response): Promise<Response<any, Record<string, any>>>;
+    getProfile(req: any, res: Response): Promise<Response<any, Record<string, any>>>;
     onlyAdmin(req: any): Promise<import("../../user/entities/user.entity").User | import("@nestjs/common").NotFoundException>;
 }

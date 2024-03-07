@@ -15,9 +15,9 @@ export class ProductSizeController {
   constructor(private readonly productSizeService: ProductSizeService) { }
 
   @HttpCode(HttpStatus.OK)
-  // @HasRoles(Role.ADMIN)
-  // @ApiBearerAuth('JWT-auth')
-  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @HasRoles(Role.ADMIN)
+  @ApiBearerAuth('JWT-auth')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Post(":productId")
   async create(@Body() createProductSizeDto: CreateProductSizeDto,
     @Request() req,
@@ -27,7 +27,7 @@ export class ProductSizeController {
       const data = await this.productSizeService.create(createProductSizeDto, id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -39,14 +39,14 @@ export class ProductSizeController {
   //     const data = await this.productSizeService.findOne(+id);
   //     return res.status(HttpStatus.OK).json(data)
   //   } catch (e) {
-  //     return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+  //     return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message ,  error:true});
   //   }
   // }
 
   @HttpCode(HttpStatus.OK)
-  // @HasRoles(Role.ADMIN)
-  // @ApiBearerAuth('JWT-auth')
-  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @HasRoles(Role.ADMIN)
+  @ApiBearerAuth('JWT-auth')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Patch(':id')
   async update(@Param('id') id: string,
     @Body() updateProductSizeDto: UpdateProductSizeDto,
@@ -56,14 +56,14 @@ export class ProductSizeController {
       const data = await this.productSizeService.update(+id, updateProductSizeDto);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
   @HttpCode(HttpStatus.OK)
-  // @HasRoles(Role.ADMIN)
-  // @ApiBearerAuth('JWT-auth')
-  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  @HasRoles(Role.ADMIN)
+  @ApiBearerAuth('JWT-auth')
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Delete(':id')
   async remove(@Param('id') id: string,
     @Request() req,
@@ -72,7 +72,7 @@ export class ProductSizeController {
       const data = await this.productSizeService.remove(+id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 }

@@ -27,7 +27,7 @@ export class CartController {
       const data = await this.cartService.create(createCartDto, req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -44,7 +44,7 @@ export class CartController {
       const data = await this.cartService.findOne(+req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -59,10 +59,10 @@ export class CartController {
     @Res() res: Response,
     @Body() updateCartDto: UpdateCartDto) {
     try {
-      const data = await this.cartService.update(+id,  updateCartDto, req.user.userId);
+      const data = await this.cartService.update(+id, updateCartDto, req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -79,7 +79,7 @@ export class CartController {
       const data = await this.cartService.remove(id, req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 }

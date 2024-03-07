@@ -27,15 +27,13 @@ import { Order } from './order/entities/order.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal:true
+      isGlobal:true,
+      envFilePath: '.development.env',
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      // username:"xojwxtmy_Admin",
-      // password:"admin2023sandalwood",
-      // database:"xojwxtmy_db",
       username:"root",
       password:"",
       database:"test2",

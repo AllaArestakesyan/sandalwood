@@ -5,7 +5,7 @@ import { Response } from 'express';
 export declare class ProductSizeController {
     private readonly productSizeService;
     constructor(productSizeService: ProductSizeService);
-    create(createProductSizeDto: CreateProductSizeDto, req: any, id: number, res: Response): Promise<any>;
-    update(id: string, updateProductSizeDto: UpdateProductSizeDto, req: any, res: Response): Promise<any>;
-    remove(id: string, req: any, res: Response): Promise<any>;
+    create(createProductSizeDto: CreateProductSizeDto, req: any, id: number, res: Response): Promise<Response<any, Record<string, any>>>;
+    update(id: string, updateProductSizeDto: UpdateProductSizeDto, req: any, res: Response): Promise<Response<any, Record<string, any>>>;
+    remove(id: string, req: any, res: Response): Promise<Response<any, Record<string, any>>>;
 }

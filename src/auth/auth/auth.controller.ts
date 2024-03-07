@@ -37,7 +37,7 @@ export class AuthController {
       const data = await this.authService.register(registerDto);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.OK).json({ message: e.message });
+      return res.status(HttpStatus.OK).json({ message: e.message, error: true });
     }
   }
 
@@ -50,7 +50,7 @@ export class AuthController {
       const data = await this.userService.findOneById(req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.OK).json({ message: e.message });
+      return res.status(HttpStatus.OK).json({ message: e.message, error: true });
     }
   }
 

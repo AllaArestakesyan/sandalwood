@@ -29,7 +29,7 @@ export class UserController {
       const data = await this.userService.findAll(req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -40,7 +40,7 @@ export class UserController {
       const data = await this.userService.verify(user);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message })
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true })
     }
   }
 
@@ -55,9 +55,23 @@ export class UserController {
       const data = await this.userService.findOneById(+id);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
+
+  // @HttpCode(HttpStatus.OK)
+  // @HasRoles(Role.USER)
+  // @ApiBearerAuth('JWT-auth')
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+  // @Get('find/byToken')
+  // async findOneByToken( @Request() req,@Res() res: Response) {
+  //   try {
+  //     const data = await this.userService.findOneById(req.user.userId);
+  //     return res.status(HttpStatus.OK).json(data);
+  //   } catch (e) {
+  //     return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message,  error:true });
+  //   }
+  // }
 
   @HttpCode(HttpStatus.OK)
   @ApiBearerAuth('JWT-auth')
@@ -72,7 +86,7 @@ export class UserController {
       const data = await this.userService.changePassword(changePassword, req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -102,7 +116,7 @@ export class UserController {
       const data = await this.userService.updatePic(req.user.userId, file);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -119,7 +133,7 @@ export class UserController {
       const data = await this.userService.updateData(req.user.userId, updateUserDto)
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
   @HttpCode(HttpStatus.OK)
@@ -133,14 +147,14 @@ export class UserController {
       const data = await this.userService.forgotPassword(forgotPassword)
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
   @HttpCode(HttpStatus.OK)
   @Patch('/us/resetPassword/:email')
   async resetPassword(
     @Body() resetPassword: ResetPassword,
-    @Param("email") email:string,
+    @Param("email") email: string,
     @Res() res: Response,
     @Request() req
   ) {
@@ -148,7 +162,7 @@ export class UserController {
       const data = await this.userService.resetPassword(resetPassword, email)
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -162,7 +176,7 @@ export class UserController {
       const data = await this.userService.remove(+id, req.user.userId);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 }

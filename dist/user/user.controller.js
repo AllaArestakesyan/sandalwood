@@ -11,14 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const update_user_dto_1 = require("./dto/update-user.dto");
 const auth_guard_1 = require("@nestjs/passport/dist/auth.guard");
-const express_1 = require("express");
 const change_password_dto_1 = require("./dto/change-password.dto");
 const platform_express_1 = require("@nestjs/platform-express");
 const config_1 = require("../upload/config");
@@ -39,7 +37,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async verify(user, res) {
@@ -48,7 +46,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async findOne(id, res) {
@@ -57,7 +55,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async changePassword(changePassword, res, req) {
@@ -66,7 +64,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async update(res, file, req) {
@@ -75,7 +73,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async updateData(updateUserDto, res, req) {
@@ -84,7 +82,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async forgotPassword(forgotPassword, res, req) {
@@ -93,7 +91,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async resetPassword(resetPassword, email, res, req) {
@@ -102,7 +100,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async remove(id, res, req) {
@@ -111,7 +109,7 @@ let UserController = class UserController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
 };
@@ -124,7 +122,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findAll", null);
 __decorate([
@@ -133,7 +131,7 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [verify_dto_1.Verify, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [verify_dto_1.Verify, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "verify", null);
 __decorate([
@@ -145,7 +143,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "findOne", null);
 __decorate([
@@ -157,7 +155,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [change_password_dto_1.ChangePasswordDto, typeof (_d = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _d : Object, Object]),
+    __metadata("design:paramtypes", [change_password_dto_1.ChangePasswordDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changePassword", null);
 __decorate([
@@ -182,7 +180,7 @@ __decorate([
     __param(1, (0, common_1.UploadedFile)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_e = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _e : Object, Object, Object]),
+    __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "update", null);
 __decorate([
@@ -194,7 +192,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [update_user_dto_1.UpdateUserDto, typeof (_f = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _f : Object, Object]),
+    __metadata("design:paramtypes", [update_user_dto_1.UpdateUserDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateData", null);
 __decorate([
@@ -204,7 +202,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [forgot_password_1.ForgotPassword, typeof (_g = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _g : Object, Object]),
+    __metadata("design:paramtypes", [forgot_password_1.ForgotPassword, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "forgotPassword", null);
 __decorate([
@@ -215,7 +213,7 @@ __decorate([
     __param(2, (0, common_1.Res)()),
     __param(3, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [reset_password_1.ResetPassword, String, typeof (_h = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _h : Object, Object]),
+    __metadata("design:paramtypes", [reset_password_1.ResetPassword, String, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "resetPassword", null);
 __decorate([
@@ -228,7 +226,7 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_j = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _j : Object, Object]),
+    __metadata("design:paramtypes", [String, Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "remove", null);
 UserController = __decorate([

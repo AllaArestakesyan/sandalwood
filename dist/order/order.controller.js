@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderController = void 0;
 const common_1 = require("@nestjs/common");
@@ -22,7 +21,6 @@ const roles_decorator_1 = require("../user/role/roles.decorator");
 const enum_role_1 = require("../user/role/enum.role");
 const passport_1 = require("@nestjs/passport");
 const roles_guard_1 = require("../auth/roles.guard");
-const express_1 = require("express");
 let OrderController = class OrderController {
     constructor(orderService) {
         this.orderService = orderService;
@@ -33,7 +31,7 @@ let OrderController = class OrderController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async findOne(req, res) {
@@ -42,7 +40,7 @@ let OrderController = class OrderController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
 };
@@ -56,7 +54,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_order_dto_1.CreateOrderDto, Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [create_order_dto_1.CreateOrderDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "create", null);
 __decorate([
@@ -68,7 +66,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], OrderController.prototype, "findOne", null);
 OrderController = __decorate([

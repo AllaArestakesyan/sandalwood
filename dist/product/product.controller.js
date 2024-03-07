@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const common_1 = require("@nestjs/common");
@@ -25,7 +24,6 @@ const passport_1 = require("@nestjs/passport");
 const roles_guard_1 = require("../auth/roles.guard");
 const platform_express_1 = require("@nestjs/platform-express");
 const config_1 = require("../upload/config");
-const express_1 = require("express");
 let ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
@@ -38,7 +36,7 @@ let ProductController = class ProductController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async findAll(res) {
@@ -47,7 +45,7 @@ let ProductController = class ProductController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async filterBy(page, categoryName, color, min_price, max_price, size, limit, res) {
@@ -56,7 +54,7 @@ let ProductController = class ProductController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async findOne(id, res) {
@@ -65,7 +63,7 @@ let ProductController = class ProductController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     update(id, updateProductDto) {
@@ -77,7 +75,7 @@ let ProductController = class ProductController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
 };
@@ -133,7 +131,7 @@ __decorate([
     __param(3, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto,
-        Array, Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+        Array, Object, Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "create", null);
 __decorate([
@@ -141,7 +139,7 @@ __decorate([
     (0, common_1.Get)(),
     __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findAll", null);
 __decorate([
@@ -156,7 +154,7 @@ __decorate([
     __param(6, (0, common_1.Query)("limit")),
     __param(7, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, String, String, Number, Number, Number, Number, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [Number, String, String, Number, Number, Number, Number, Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "filterBy", null);
 __decorate([
@@ -165,7 +163,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_d = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "findOne", null);
 __decorate([
@@ -189,7 +187,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_e = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _e : Object]),
+    __metadata("design:paramtypes", [String, Object]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "remove", null);
 ProductController = __decorate([

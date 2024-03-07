@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CartController = void 0;
 const common_1 = require("@nestjs/common");
@@ -23,7 +22,6 @@ const roles_decorator_1 = require("../user/role/roles.decorator");
 const enum_role_1 = require("../user/role/enum.role");
 const passport_1 = require("@nestjs/passport");
 const roles_guard_1 = require("../auth/roles.guard");
-const express_1 = require("express");
 let CartController = class CartController {
     constructor(cartService) {
         this.cartService = cartService;
@@ -34,7 +32,7 @@ let CartController = class CartController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async findOne(req, res) {
@@ -43,7 +41,7 @@ let CartController = class CartController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async update(id, req, res, updateCartDto) {
@@ -52,7 +50,7 @@ let CartController = class CartController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
     async remove(id, req, res) {
@@ -61,7 +59,7 @@ let CartController = class CartController {
             return res.status(common_1.HttpStatus.OK).json(data);
         }
         catch (e) {
-            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message });
+            return res.status(common_1.HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
         }
     }
 };
@@ -75,7 +73,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_cart_dto_1.CreateCartDto, Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [create_cart_dto_1.CreateCartDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "create", null);
 __decorate([
@@ -87,7 +85,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "findOne", null);
 __decorate([
@@ -101,7 +99,7 @@ __decorate([
     __param(2, (0, common_1.Res)()),
     __param(3, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object, update_cart_dto_1.UpdateCartDto]),
+    __metadata("design:paramtypes", [Number, Object, Object, update_cart_dto_1.UpdateCartDto]),
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "update", null);
 __decorate([
@@ -114,7 +112,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object, typeof (_d = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [Number, Object, Object]),
     __metadata("design:returntype", Promise)
 ], CartController.prototype, "remove", null);
 CartController = __decorate([

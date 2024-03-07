@@ -40,16 +40,16 @@ export class ProductImagesController {
   @UseInterceptors(FilesInterceptor('images', null, multerOptions))
   @Post('/addImagesProduct')
   async update(
-    @Body() obj:any,
+    @Body() obj: any,
     @Res() res: Response,
-    @UploadedFiles() images:Array<any>,
+    @UploadedFiles() images: Array<any>,
     @Request() req
   ) {
     try {
       const data = await this.productImagesService.addImagesProduct(obj.productId, images);
       return res.status(HttpStatus.OK).json(data);
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 
@@ -66,7 +66,7 @@ export class ProductImagesController {
       const data = await this.productImagesService.remove(+id);
       return res.status(HttpStatus.OK).json(data)
     } catch (e) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message });
+      return res.status(HttpStatus.BAD_REQUEST).json({ message: e.message, error: true });
     }
   }
 }

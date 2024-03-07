@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WishlistController = void 0;
 const common_1 = require("@nestjs/common");
@@ -22,7 +21,6 @@ const roles_decorator_1 = require("../user/role/roles.decorator");
 const enum_role_1 = require("../user/role/enum.role");
 const passport_1 = require("@nestjs/passport");
 const roles_guard_1 = require("../auth/roles.guard");
-const express_1 = require("express");
 let WishlistController = class WishlistController {
     constructor(wishlistService) {
         this.wishlistService = wishlistService;
@@ -65,7 +63,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_wishlist_dto_1.CreateWishlistDto, Object, typeof (_a = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _a : Object]),
+    __metadata("design:paramtypes", [create_wishlist_dto_1.CreateWishlistDto, Object, Object]),
     __metadata("design:returntype", Promise)
 ], WishlistController.prototype, "create", null);
 __decorate([
@@ -77,7 +75,7 @@ __decorate([
     __param(0, (0, common_1.Request)()),
     __param(1, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, typeof (_b = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], WishlistController.prototype, "findOne", null);
 __decorate([
@@ -90,7 +88,7 @@ __decorate([
     __param(1, (0, common_1.Request)()),
     __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object, typeof (_c = typeof express_1.Response !== "undefined" && express_1.Response) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [Number, Object, Object]),
     __metadata("design:returntype", Promise)
 ], WishlistController.prototype, "remove", null);
 WishlistController = __decorate([

@@ -4,6 +4,6 @@ import { Response } from 'express';
 export declare class ProductColorController {
     private readonly productColorService;
     constructor(productColorService: ProductColorService);
-    create(createProductColorDto: CreateProductColorDto, req: any, id: number, res: Response): Promise<any>;
-    remove(id: string, req: any, res: Response): Promise<any>;
+    create(createProductColorDto: CreateProductColorDto, req: any, id: number, res: Response): Promise<Response<any, Record<string, any>>>;
+    remove(id: string, req: any, res: Response): Promise<Response<any, Record<string, any>>>;
 }
