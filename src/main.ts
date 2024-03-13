@@ -33,6 +33,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   // await app.listen(4027, "173.249.1.7");
-  await app.listen(4027, "127.0.0.1");
+  await app.listen(8080, "127.0.0.1");
 }
 bootstrap();
